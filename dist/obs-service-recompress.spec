@@ -25,19 +25,19 @@ Summary:        An OBS source service: Recompress files
 License:        GPL-2.0-or-later
 Group:          Development/Tools/Building
 URL:            https://github.com/openSUSE/obs-service-%{service}
+BuildRoot:      %_tmppath/%name-%version-build
 Source:         %{name}-%{version}.tar.gz
 BuildRequires:  perl(Test::More)
 
 BuildRequires:  bzip2
 BuildRequires:  gzip
 BuildRequires:  xz
+BuildRequires:  perl(Test::More)
+Requires:       %{_bindir}/gzip
 Requires:       bzip2
-Requires:       gzip
 Requires:       xz
 
-%if (0%{?suse_version} <= 1500 && 0%{?sle_version} <= 150000) || 0%{?fedora_version} < 25 || 0%{?rhel_version} < 6
-# noop
-%else
+%if 0%{?suse_version} > 1500 || 0%{?sle_version} > 150000 || 0%{?fedora_version} > 25
 BuildRequires:  zstd
 Requires:       zstd
 %endif
